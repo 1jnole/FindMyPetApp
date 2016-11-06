@@ -1,0 +1,13 @@
+.ng-invalid.ng-dirty
+{
+  border-color:red;
+  outline-color: red;
+  -webkit-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow:none;
+}
+
+.ng-valid.ng-dirty
+{
+  border-color:green
+}

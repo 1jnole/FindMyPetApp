@@ -1,0 +1,50 @@
+<div class="container " ng-controller="animalManagementController as animalMgmCtrl">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1 toppad">
+            <form class="form-horizontal" name="animalRegistration" ng-submit="animalRegistration.$valid && animalMgmCtrl.registerAnimal()" novalidate>
+                <div class="form-class">
+                    <label for="animal">Name</label>
+                    <input type="text" class="form-control" placeholder="Name" id='name' name="animalName" ng-model="animal.name" ng-pattern="/^[a-zA-Zñá-ú\s]+$/" maxlength="15" minlenght="5"  required/>
+                </div>
+                <div ng-messages="animalRegistration.animalName.$error" class="textBoxError"  role="alert">
+                  <div ng-message="maxlength">Name must be shorter than 15 characters</div>
+                  <div ng-message="minlength">Name must be greater than 5 characters</div>
+                  <div ng-message="pattern">Name must be informed correctly</div>
+                </div>
+
+                <div class="form-class">
+                    <label for="animal">Weight (g)</label>
+                    <input type="number" class="form-control bfh-number" placeholder="Weight" id='weight' name="weightAnimal" ng-model="animal.weight"  />
+                </div>
+
+                <div class="form-class">
+                    <label for="animal">Height (cm)</label>
+                    <input type="number" class="form-control" placeholder="Height" id='heightAnimal' name="height" ng-model="animal.height"  ng-pattern="/[1-9]$/"   required   />
+                </div>
+
+                <div ng-messages="animalRegistration.height.$error" class="textBoxError"  role="alert">
+                  <div ng-message="pattern">Height must be informed correctly</div>
+                </div>
+
+                <div class="form-class">
+                    <label for="animal">Image</label>
+                    <label for="image">
+                        <input class="form-control" type="file" file="image" accept="image/*" ng-model="animalImage" id="image" />
+                    </label>
+                </div>
+
+                <div class="form-class">
+                    <label for="animalRegistration">Description of your pet or some clues to help the localization (optional)</label>
+                    <textarea class="form-control" rows="4" name="description" id='description' ng-model="animal.description" /> </textarea>
+                </div>
+
+               <div class="form-class">
+                    <label for="start">Date of birth</label>
+                       <input type="text" class="form-control" pick-a-date="date" ng-model="animal.dateOfBirth" pick-a-date-options="{ format: 'yyyy-mm-dd' }" readonly/>
+
+                    <input class="btn btn-default btn-primary btn-lg-6" type="submit" value="Submit" ng-disabled="animalRegistration.$invalid" />
+
+            </form>
+        </div>
+    </div>
+</div>

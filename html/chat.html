@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="chatApp">
+  <head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons"/>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"/> -->
+
+
+    <!-- Angular-->
+    <script src="../js/frameWorks/angular/angular.js" type="text/javascript" xml:space="preserve"></script>
+
+     <script src="../js/frameWorks/angular/angular-datepicker.js" type="text/javascript" xml:space="preserve"></script>
+    <script src="../js/frameWorks/angular/angular-file-upload.js" type="text/javascript" xml:space="preserve"></script>
+    <script src="../js/frameWorks/angular/i18n/angular-locale_es-es.js" type="text/javascript" xml:space="preserve"></script>
+
+    <!-- jQuery-->
+    <script src="../js/frameWorks/jQuery/jQuery.js" type="text/javascript" xml:space="preserve"></script>
+    <script src="../js/frameWorks/jQuery/jquery-ui.js" type="text/javascript" xml:space="preserve"></script>
+
+
+    <script src="//cdn.pubnub.com/pubnub-3.7.21.js" xml:space="preserve"></script>
+    <script src="//cdn.pubnub.com/sdk/pubnub-angular/pubnub-angular-3.1.1.min.js" xml:space="preserve"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js" xml:space="preserve"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.2.0/lodash.js" xml:space="preserve"></script>
+
+
+    <script src="../js/model/userLogginObj.js" type="text/javascript" xml:space="preserve"></script>
+    <script src="../js/model/userDataObj.js" type="text/javascript" xml:space="preserve"></script>
+    <script src="../js/model/animalObj.js" type="text/javascript" xml:space="preserve"></script>
+    <script src="../js/model/announcementObj.js" type="text/javascript" xml:space="preserve"></script>
+    <script src="../js/model/messageObj.js" type="text/javascript" xml:space="preserve"></script>
+    <script src="../js/control/generalFunctions.js" type="text/javascript" xml:space="preserve"></script>
+    <script src="../js/control/chat.js" xml:space="preserve"></script>
+
+    <title></title>
+  </head>
+  <body  ng-controller="sessionController as sessionCtrl" ng-init="sessionCtrl.sessionControl()">
+    <div class="container-fluid" ng-controller="chatController as chatCtrl">
+     <ul class="collection">
+      <li class="collection-item avatar" ng-repeat="message in messages"> zzs
+       <img src="{{avatarUrl(message.sender_uuid)}}" alt="{{message.sender_uuid}}" class="circle">
+       <!--  The "pubnub id" of the person that sends the message-->
+       <span class="title">{{message.sender_uuid}}</span>
+       <p><i class="prefix mdi-action-alarm"></i><span class="message-date">{{message.date | date:"MM/dd/yyyy 'at' h:mma"}}</span></br> {{ message.content }}</p>
+      </li>
+     </ul>
+     <footer class="teal chatfootear">
+      <form ng-submit="sendMessage()" class="container">
+       <div class="row">
+        <div class="input-field col s10">
+         <i class="prefix mdi-communication-chat"></i>
+         <input ng-model="messageContent" type="text" placeholder="Type your message">
+         <span class="chip left">
+                 <img src="{{avatarUrl(uuid)}}">
+                {{uuid}}
+               </span>
+        </div>
+        <div class="input-field col s2">
+         <button type="submit" class="waves-effect waves-light btn-floating btn-large">
+                 <i class="mdi-content-send"></i>
+               </button>
+        </div>
+       </div>
+      </form>
+     </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<form name="userProfileModification" ng-submit="userProfileModification.$valid && sessionCtrl.updateUserData()">
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="#" ng-click="accountData = 0">Personal Information</a>
+                        |
+                        <a href="#" ng-click="accountData = 1;">Change your password</h4>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 " align="center"><img src="../html/{{userData.getImage()}}" alt="" width="150px" height="150px" class="img-circle img-responsive"></div>
+                        <div class=" col-md-9 col-lg-9 ">
+                            <!-- <form class="" name="userProfileChangePassword" ng-submit="userProfileChangePassword.$valid && sessionCtrl.updatePasswordDirect()" > -->
+
+                                <table class="table table-user-information">
+                                    <tbody>
+
+                                        <tr ng-show="accountData == 1">
+                                            <td>Current Password:</td>
+                                            <td>
+                                                <span ><input type="password" name="password" ng-model="currentPassword" class="form-control" ></span>
+                                            </td>
+                                        </tr>
+
+                                        <tr ng-show="accountData == 1">
+                                            <td>New Password:</td>
+                                            <td>
+                                                <span ><input type="password" ng-model="newPassword" name="password" class="form-control"></span>
+                                            </td>
+                                        </tr>
+
+                                        <tr ng-show="accountData == 1">
+                                            <td>Repeat new Password:</td>
+                                            <td>
+                                                <span ><input type="password" name="password" ng-model="confirmPassword"  ng-change="sessionCtrl.checkPassword()" class="form-control"></span>
+                                                <div class="help-block" ng-if="newPassword!=confirmPassword">
+                                                  Passwords must match
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                        <!-- </form> -->
+
+
+                                        <tr ng-show="accountData == 0">
+                                            <td>Name:</td>
+                                            <td ng-show="showUserData == 1">
+                                                <span ng-show="showUserData == 1">
+                                                    {{userDataAux.getName()}}</span>
+                                            </td>
+                                            <td>
+                                                <span ng-show="showInputText == 1"><input type="text" ng-model="userData.name" name="name" class="form-control" ng-pattern="/^[a-zA-Zñá-ú\s]+$/" required/></span>
+                                            </td>
+                                        </tr>
+
+                                        <tr ng-show="accountData == 0">
+                                            <td>Last Name:</td>
+                                            <td ng-show="showUserData == 1">
+                                                <span>{{userDataAux.getLastName()}}</span>
+                                            </td>
+                                            <td>
+                                                <span ng-show="showInputText == 1">
+                                                    <input type="text" ng-model="userData.lastName" name="name" class="form-control" ng-pattern="/^[a-zA-Zñá-ú\s]+$/" required=""/></span>
+                                            </td>
+                                        </tr ng-show="accountData == 0">
+
+                                        <tr ng-show="accountData == 0">
+                                            <td>Email</td>
+                                            <td ng-show="showUserData == 1">
+                                                <span>{{ userDataAux.getEmail()}}</span>
+                                            </td>
+                                            <td>
+                                                <span ng-show="showInputText == 1">
+                                                    <input type="text" ng-model="userData.email" name="name" class="form-control" ng-blur="checkEmail()" ng-pattern="/^(([a-zA-Z]|[0-9])|([-]|[_]|[.]))+[@](([a-zA-Z0-9])|([-])){2,63}[.](([a-zA-Z0-9]){2,63})+$/" required></span>
+                                            </td>
+                                        </tr>
+                                        <tr >
+                                            <tr ng-show="accountData == 0">
+                                                <td>Home Address</td>
+                                                <td ng-show="showUserData == 1">
+                                                    <span>{{ userDataAux.getAddress()}}</span>
+                                                </td>
+                                                <td>
+                                                    <span ng-show="showInputText == 1"><input type="text" ng-model="userData.address" name="name" class="form-control"></span>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="accountData == 0">
+                                                <td>Postal Code</td>
+                                                <td ng-show="showUserData == 1">
+                                                    {{ userDataAux.getPostalCode() }}
+                                                </td>
+                                                <td>
+                                                    <span ng-show="showInputText == 1">
+                                                        <input type="text" ng-model="userData.postalCode" name="name" class="form-control"  ng-pattern="/^([1-9]{2}|[0-9][1-9]|[1-9][0-9])[0-9]{3}$/"></span>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="accountData == 0">
+                                              <td>Phone Number</td>
+                                              <td ng-show="showUserData == 1">
+                                                  {{ userDataAux.getPhone() }}
+
+                                              </td>
+
+                                              <td >
+                                                  <span ng-show="showInputText == 1">
+                                                      <input type="text" ng-model="userData.phone" name="phone" class="form-control" ng-pattern="/^[0-9]{2,3}-? ?[0-9]{6,7}$/" required></span>
+                                              </td>
+                                            </tr>
+                                            <!-- <tr ng-show="accountData == 0">
+                                                <td>Image</td>
+                                                <td>
+                                                    <input class="form-control" type="file" file="image" accept="image/*" ng-model="image" id="animalImage"/>
+                                                </td>
+                                            </tr> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            <button type="button" class="btn btn-primary" ng-click="showInputText = 1;showUserData = 0;hideButton = 1;" ng-show="accountData == 0 && hideButton == 0;">Modify</button>
+                            <button type="button" class="btn btn-danger" ng-click="userProfileInf = 0" ng-show="accountData == 0 &&  hideButton == 0">Back</button>
+                            <button type="button" class="btn btn-primary" ng-show="accountData==1;validPassword==1" ng-click="sessionCtrl.sendChangePassword()">Change Password</button>
+                            <input type="submit" class="btn btn-success" ng-click="showInputText = 1;showUserData = 0" ng-show="showInputText == 1 && accountData == 0" ng-disabled="userProfileModification.$invalid" value="Save changes" />
+                            <button type="button" class="btn btn-danger" ng-click="hideButton =0;showInputText=0;showUserData=1;sessionCtrl.initObj()" ng-show="showInputText == 1 && accountData == 0">Cancel</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1 toppad">
+            <div >
+                <form class="form-horizontal" name="announcementCreation" ng-submit="announcementCreation.$valid && announcementCtrl.updateAnnouncement()">
+                    <!--  <h2 class="form-signin-heading">Last Step, Create the Announcement</h2> -->
+                    <div class="form-class">
+                        <label for="formGroup">Select the animal *</label>
+                        <select id="idAnimalSelect" class="form-control" ng-options="item as item.name for item in animals track by item.idAnimal" ng-model="animalAux" ng-change="animalMgmCtrl.validateSelect()" >
+                            <option value="" id="novalue">Choose an option</option>
+                        </select>
+                    </div>
+                    <div class="form-class">
+                        <label for="announcement">Title</label>
+                        <input type="text" class="form-control" placeholder="Name" name="title" id="inputNameAnnouncement" ng-model="announToUpd.title" ng-pattern="/^[a-zA-Zñá-ú\s]+$/" ng-maxlength=30 />
+                        <div ng-messages="announcementCreation.title.$error" class="textBoxError" role="alert">
+                            <div ng-message="maxlength">Title must be shorter than 30 characters</div>
+                            <div ng-message="pattern">Title must be only numbers or strange charatcers</div>
+                        </div>
+                    </div>
+
+                    <div class="form-class">
+                        <label for="announcement">Message</label>
+                        <textarea class="form-control" rows="4" name="description" id="inputDescriptionAnnouncement" ng-model="announToUpd.description" />
+                    </textarea>
+                </div>
+
+                <div class="form-class">
+                    <label for="announcement">Location Missed</label>
+                    <input type="text" ng-model="announToUpd.locationMissed" id="inputLocationAnnouncement" class="form-control" />
+                </div>
+                <div class="form-class">
+                    <input class="btn btn-default  btn-lg-8" type="submit" value="Update" ng-disabled="announcementCreation.$invalid"/>
+                </div>
+                <!--<button class="btn btn-default btn-warning btn-lg-6" type="button" >Back</button> -->
+            </form>
+        </div>
+    </div>
+</div>
+</div>

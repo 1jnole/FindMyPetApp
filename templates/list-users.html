@@ -1,0 +1,80 @@
+ <div class="container" ng-controller="listUsersController as listUsersCtrl" ng-init="listUsersCtrl.loadUsers()">
+    <div class="row">
+        <div class="col-xs-14 col-sm-14 col-md-4 col-lg-4 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1 toppad">
+            <!-- <table class="table">
+                <tr>
+                    <th>Search user</th>
+                    <th>User per page</th>
+                </tr>
+
+                <tr>
+                    <td ng-if="user.getRole()  == 2">
+                        <input type="text" ng-model="nameSearch" class="form-control" ng-disabled="animalsForm.$invalid" />
+                    </td>
+                    <td ng-show="user.getRole()  == 2">
+                        <input type="number" min="1" max="100" class="form-control" ng-model="pageSize" ng-disabled="animalsForm.$invalid" />
+                    </td>
+                </tr>
+            </table>-->
+             <form name="usersListForm" novalidate>
+                <h3>My animals registered</h3>
+                <table class="table">
+                <tbody>
+                  <tr>
+           			    <th class="image"></th>
+                    <th class="username">UserName</th>
+                    <th class="email">Email</th>
+                    <th class="name">Name</th>
+                    <th class="lastName">LastName</th>
+                    <th class="phone">Phone </th>
+                    <th class="date">Date Added</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+              </tbody>
+
+                    <tr dir-paginate="userArray in filteredData | itemsPerPage: pageSize" current-page="currentPage">
+
+                        <td>
+                            <img src="{{user.getImage()}}"  class="img-circle" alt="" height="60px" weigh="60px" />
+                        </td>
+                        <td>
+                            <input type="text" id="nick{{$index}}" ng-model="userArray.nick" class="form-control" required />
+                        </td>
+                        <td>
+                            <input type="text" id="email{{$index}}" ng-model="user.email" class="form-control" required />
+                        </td>
+                        <td>
+                            <input type="text" id="name{{$index}}" ng-model="user.name" class="form-control" required />
+                        </td>
+
+                        <td>
+                            <input type="text" id="lastName{{$index}}" ng-model="userArray.lastName" class="form-control" required />
+                        </td>
+
+                        <td>
+                            <input type="text" id="phone{{$index}}" ng-model="userArray.phone" class="form-control" required />
+                        </td>
+
+                        <td>
+                            <input type="text" id="dateAdded{{$index}}" ng-model="userArray.dateAdded" class="form-control" required />
+                        </td>
+
+                        <td>
+                            <input type="button" class="btn btn-danger" id="modify{{$index}}" value="X" ng-click="animalMgmCtrl.removeAnimal($index,animal)" />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-warning" id="remove{{$index}}" value="Modify" ng-click="animalMgmCtrl.modifyAnimal($index,animal)" />
+                        </td>
+                    </tr>
+                </table>
+                <div class="other-controller">
+                    <div class="text-left" boundary-links="true">
+                        <dir-pagination-controls boundary-links="true" template-url="../templates/dir-pagination-controls.html"></dir-pagination-controls>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

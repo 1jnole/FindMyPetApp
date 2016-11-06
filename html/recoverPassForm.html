@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html ng-app="recoverApp" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Find My Pet</title>
+      <!-- <link rel="shortcut icon" HREF="images/logo.jpg"/> -->
+      <link rel="stylesheet" type="text/css" href="../lib/css/bootstrap.min.css"/>
+      <link rel="stylesheet" type="text/css" href="../css/creative.css"/>
+      <link rel="stylesheet" type="text/css" href="../css/index.css"/>
+      <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+      <link rel="stylesheet" href="../lib/css/custombox.min.css"/>
+      <link rel="stylesheet" type="text/css" href="../lib/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Cherry+Swash:700,400" rel="stylesheet" type="text/css">
+
+      <!-- Angular-->
+      <!-- Angular-->
+      <script src="../js/frameWorks/angular/angular.min.js" type="text/javascript" xml:space="preserve"></script>
+      <script src="../js/frameWorks/angular/angular-file-upload.js" type="text/javascript" xml:space="preserve"></script>
+      <script src="../js/frameWorks/angular/i18n/angular-locale_es-es.js" type="text/javascript" xml:space="preserve"></script>
+      <script src="../js/frameWorks/angular/ng-currency.js" type="text/javascript" xml:space="preserve"></script>
+      <script src="../js/frameWorks/angular/dirPagination.js" type="text/javascript" xml:space="preserve"></script>
+
+      <!-- jQuery-->
+      <script src="../js/frameWorks/jQuery/jQuery.js" type="text/javascript" xml:space="preserve"></script>
+
+      <script src="../js/frameWorks/jQuery/jquery-ui.js" type="text/javascript" xml:space="preserve"></script>
+
+      <script src="../js/frameWorks/angular/angular-messages.js"></script>
+
+      <!-- customBox -->
+      <script src="../lib/js/custombox.min.js" type="text/javascript" xml:space="preserve"></script>
+      <script src="../lib/js/legacy.min.js" type="text/javascript" xml:space="preserve"></script>
+
+      <script src="../js/model/userLogginObj.js" type="text/javascript" xml:space="preserve"></script>
+      <script src="../js/model/userDataObj.js" type="text/javascript" xml:space="preserve"></script>
+      <script src="../js/model/contactObj.js" type="text/javascript" xml:space="preserve"></script>
+      <script src="../js/control/generalFunctions.js" type="text/javascript" xml:space="preserve"></script>
+      <script src="../js/control/recover.js" type="text/javascript" xml:space="preserve"></script>
+      <script type="text/javascript" src="../lib/js/bootstrap.min.js"></script>
+
+    </head>
+    <body ng-controller="recoverController as recoverCtrl" ng-init="recoverCtrl.sessionControl()">
+        <nav class="navbar navbar-default navbar-fixed-top micolor mifuente">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="#page-top">
+                        <span class="miletra">Find My Pet
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden">
+                            <a href="#page-top"></a>
+                        </li>
+                        <li id="loginButton" ng-click="loginformshow=0;showRegisterForm=0;recoverFormShow=0">
+                            <a class="page-scroll" href="#">
+                                <i class="fa fa-user miletra"></i>
+                                <span class="miletra">
+                                    Login</span></a>
+                                </li>
+                                <li id="registerButton" ng-click="loginformshow=1;showRegisterForm=1">
+                                    <a class="page-scroll " href="#">
+                                        <i class="fa fa-user-plus miletra"></i>
+                                        <b class="miletra">Register</b>
+                                    </a>
+                                </li>
+                                <li id="contactButton" >
+                                    <a class="page-scroll " href="#t">
+                                        <i class="fa fa-pencil miletra"></i>
+                                        <b class="miletra">Contact
+                                        </b>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+    <div class="container formRecoverPassword" style="margin-top:5vw;" >
+
+        <div id="recover" >
+                <form class="form-signin" name="userRecover" ng-submit="userRecover.$valid && recoverCtrl.recoverSend()">
+                    <h2 class="form-signin-heading">Recovering password</h2>
+                    <div class="form-group col-xs-12">
+                      <label for="nick"class="col-sm-2 control-label">Username*</label>
+                      <div class="col-sm-12">
+                        <div class="right-inner-addon">
+
+                          <i class="fa fa-user"></i>
+                          <input type="text" ng-model="userLogin.nick" class="form-control" id="inputRecoverNick" placeholder="Nick" name="nick" ng-maxlength=16 ng-minlength=3 ng-pattern="/^[a-zA-Z0-9]*$/" required >
+                        </div>
+                        <div ng-messages="userRecover.nick.$error" class="textBoxError"  role="alert">
+                          <div ng-message="maxlength">Nick must be shorter than 16 characters</div>
+                          <div ng-message="minlength">Nick must be greater than 2 characters</div>
+                          <div ng-message="pattern">Nick must be only numbers, uppercases and letters</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-xs-12">
+                      <label form="confirmPassword" class="col-sm-2 control-label">Personal Pin* </label>
+                        <div class="col-sm-12">
+                          <div class="right-inner-addon">
+                            <i class="fa fa-repeat"></i>
+                        <input type="password"  ng-model="userLogin.pin" class="form-control" id="inputPin" placeholder="Pin" name="pin" ng-maxlength=4 ng-minLength=4 required>
+                        </div>
+                        <div ng-messages="userRecover.pin.$error" class="textBoxError" role="alert">
+                          <div ng-message="maxlength">Pin must be of 4 characters</div>
+                          <div ng-message="minlegnth">Pin must be of 4 characters</div>
+                        </div>
+                      </div>
+                  </div>
+
+
+                    <div class="form-group col-xs-12">
+                      <label form="password" class="col-sm-2 control-label">New Password*</label>
+                      <div class="col-sm-12">
+                        <div class="right-inner-addon">
+                          <i class="fa fa-key"></i>
+                          <input type="password" ng-model="userLogin.password" class="form-control" id="inputPassword" placeholder="Password" name="password" ng-maxlength=16 ng-minLength=3 required>
+                        </div>
+                        <div ng-messages="userRecover.password.$error" class="textBoxError" role="alert">
+                          <div ng-message="maxlength">Password must be only numbers, uppercases and letters</div>
+                          <div ng-message="pattern">no spaces or strange characters allowed</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-xs-12">
+                      <label form="confirmPassword" class="col-sm-10 control-label">Confirm Password*</label>
+                        <div class="col-sm-12">
+                          <div class="right-inner-addon">
+                            <i class="fa fa-repeat"></i>
+                            <input type="password" ng-model="confirmPassword" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password" ng-change="recoverCtrl.checkPassword()" name="confirmPassword" ng-maxlength=16 ng-minLength=3 required>
+                        </div>
+                        <div class="help-block" ng-if="validPassword==0">
+                          Passwords must match
+                        </div>
+                      </div>
+                  </div>
+
+                    <input class="btn btn-default btn-primary btn-block recover"  type="submit"  value="Recover" ng-disabled="userRecover.$invalid || validPassword==0" />
+
+              </form>
+        </div>
+    </div>
+
+            </body>
+        </html>

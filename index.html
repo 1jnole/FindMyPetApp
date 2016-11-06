@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html ng-app="findMyPet" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Find My Pet</title>
+        <!-- <link rel="shortcut icon" HREF="images/logo.jpg"/> -->
+
+        <!-- Angular-->
+        <script src="js/frameWorks/angular/angular.min.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/frameWorks/angular/i18n/angular-locale_es-es.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/frameWorks/angular/angular-file-upload.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/frameWorks/angular/angular-messages.js"></script>
+        <script src="js/frameWorks/angular/ng-currency.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/frameWorks/angular/dirPagination.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/frameWorks/angular/ngDialog.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+        <script src="js/frameWorks/angular/angularjs-google-maps.js"></script>
+
+        <!-- jQuery-->
+        <script src="js/frameWorks/jQuery/jQuery.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/frameWorks/jQuery/jquery-ui.js" type="text/javascript" xml:space="preserve"></script>
+
+        <!-- customBox -->
+        <script src="lib/js/custombox.min.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="lib/js/legacy.min.js" type="text/javascript" xml:space="preserve"></script>
+
+
+        <script src="js/control/generalFunctions.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/control/index.js" type="text/javascript" xml:space="preserve"></script>
+        <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+
+        <script src="js/model/userLogginObj.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/model/userDataObj.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/model/contactObj.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/model/animalObj.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/model/announcementObj.js" type="text/javascript" xml:space="preserve"></script>
+
+        <link rel="stylesheet" href="lib/css/ngDialog.css"/>
+        <link rel="stylesheet" href="lib/css/ngDialog-theme-default.css"/>
+        <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/creative.css"/>
+        <link rel="stylesheet" type="text/css" href="css/index.css"/>
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+        <link rel="stylesheet" href="lib/css/custombox.min.css"/>
+        <link rel="stylesheet" type="text/css" href="lib/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Cherry+Swash:700,400" rel="stylesheet" type="text/css">
+
+    </head>
+    <body ng-controller="sessionController as sessionCtrl" ng-init="sessionCtrl.sessionControl()">
+        <nav class="navbar navbar-default navbar-fixed-top micolor mifuente">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand page-scroll colorWhiteText" href="index.html">
+                        <span class="miletra">Find My Pet
+                        </span>
+                    </a>
+
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden">
+                            <a href="#page-top"></a>
+                        </li>
+
+
+                        <li ng-show="inicioSesionSi==0" id="loginButton" ng-click="loginformshow=0;showRegisterForm=0;recoverFormShow=0">
+                            <a class="page-scroll colorWhiteText" href="#">
+                                <i class="fa fa-user miletra"></i>
+                                <span class="miletra">
+                                    Login</span>
+                            </a>
+                        </li>
+
+                    </li>
+                    <li ng-show="inicioSesionSi==1" id="profileButton">
+                        <a class="page-scroll colorWhiteText" href="html/mainMenu.html">
+                            <i class="fa fa-user miletra"></i>
+                            <span class="miletra">
+                                Profile</span>
+                        </a>
+                    </li>
+                    <li id="contactButton">
+                        <a class="page-scroll colorWhiteText" href="#">
+                            <i class="fa fa-envelope-o miletra"></i>
+                            <b class="miletra">Contact
+                            </b>
+                        </a>
+                    </li>
+                    <li id="aboutUsButton">
+                        <a class="page-scroll colorWhiteText" href="#">
+                            <i class="fa fa-info-circle miletra"></i>
+                            <b class="miletra">About us
+                            </b>
+                        </a>
+                    </li>
+
+                    <li>
+                        <form class="navbar-form navbar-left" role="search" name="search" ng-submit="search.$valid && sessionCtrl.searchByWord()" novalidate>
+                            <div class="form-group">
+                                <div class="search">
+                                    <input type="text" class="form-control" placeholder="Search" ng-model="nameSearch">
+                                    <button class="btn btn-default" type="submit"><i class="fa fa-search c"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <div id="loginForm" hidden>
+        <login-form></login-form>
+    </div>
+    <div id="contactForm" hidden>
+        <contact-form></contact-form>
+    </div>
+
+    <div id="aboutForm" hidden>
+        <about-us></about-us>
+    </div>
+    <div>
+        <announcement-management></announcement-management>
+    </div>
+
+    <footer class="footer-distributed miletra">
+        <div class="footer-left ">
+            <h4>Find My Pet</h4>
+        </div>
+        <div class="footer-center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p>
+                    <span>22, Carrer Pius XII</span>
+                    Hospitalet del Llobregat, Spain</p>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>933 333 333</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p>
+                    <a href="mailto::webmasterfindmypet@gmail.com">webmasterfindmypet@gmail.com</a>
+                </p>
+            </div>
+
+        </div>
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>About us</span>
+              If you've lost a pet before, there is nothing worse than the worry of where your animal is, and if they will ever return. We are passionate about pets, and want to ensure more lost and found pets are reunited with their owners.
+            </p>
+            <div class="footer-icons">
+                <a href="#">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a href="#">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a href="#">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+                <a href="#">
+                    <i class="fa fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

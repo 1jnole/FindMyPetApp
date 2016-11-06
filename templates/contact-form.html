@@ -1,0 +1,62 @@
+<div class="container formColor formaContact" ng-controller="contactController as contactCtrl">
+  <form class="form-horizontal" class="contactFormStyle" name="contactFormRegist" ng-submit="contactFormRegist.$valid && contactCtrl.sendContact()">
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>Contact Form</h3></div>
+      </div>
+
+      <div class="form-group col-md-8">
+        <label for="nick" class="col-sm-2 control-label">Name*</label>
+        <div class="col-sm-10">
+          <div class="right-inner-addon">
+            <i class="fa fa-user"></i>
+            <input type="text" ng-model="contact.name" class="form-control" id="inputContactName" placeholder="Nick" name="nick" ng-maxlength=16 ng-minlength=3 ng-pattern="/^[a-zA-Z0-9]*$/" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-8">
+        <label for="nick" class="col-sm-2 control-label">Email*</label>
+        <div class="col-sm-10">
+          <div class="right-inner-addon">
+            <i class="fa fa-envelope"></i>
+            <input type="email" ng-model="contact.email" class="form-control" id="inputContactEmail" placeholder="example@gmail.com" name="mail" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-8">
+        <label form="phone" class="col-sm-2 control-label">Telephone</label>
+        <div class="col-sm-10">
+          <div class="right-inner-addon">
+            <i class="fa fa-phone"></i>
+            <input type="number" ng-model="contact.phone" class="form-control" id="inputPhone" placeholder="234568197" ng-minlength=9 ng-maxlength=11 name="phone" requied>
+          </div>
+          <div ng-messages="contactFormRegist.phone.$error" class="textBoxError" role="alert">
+            <div ng-message="maxlength">Telephone / Mobile Phone must be shorter than 11 digits</div>
+            <div ng-message="minlength">Telephone / Mobile Phone must be greater than 8 digits</div>
+            <div ng-message="pattern">No letters/strange characters</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-8">
+        <label for="nick" class="col-sm-2 control-label">Content</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" rows="4" ng-model="contact.content" required></textarea>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="col-md-2"></div>
+    <input class="btn btn-default btn-success col-md-4" type="submit" id="botonContacto" value="Send" ng-disabled="contactFormRegist.$invalid" />
+
+    <!-- <div class="textBoxError"><label class="fieldsRequired">* Required fields</label></div> -->
+
+
+  </form>
+</div>

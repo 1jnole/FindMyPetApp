@@ -1,0 +1,46 @@
+<div class="container" ng-controller="announcementController as announcementCtrl" ng-init="announcementCtrl.loadAllAnnouncements()">
+    <div class="row">
+        <div class="col-md-12" ng-if="showAnnouncementManagement == 1">
+          <h4 ng-if="filteredDataAnnoun.length == 0">We don't have announcements published</h4>
+            <div class="table-responsive" ng-if="filteredDataAnnoun.length > 0">
+                <table class="table table-bordred table-striped" >
+                  <h4>Announcements registereds</h4>
+                    <thead>
+                        <tr>
+                            <th>Announcement Title</th>
+                            <th>Animal Name</th>
+                            <th>Location</th>
+                            <th>Date Created</th>
+                            <th>Modify</th>
+                        </tr>
+                    </thead>
+                    <tbody dir-paginate="announcement in filteredDataAnnoun | itemsPerPage: pageSize" current-page="currentPage">
+                        <tr class="active">
+                            <td id="announTitle{{$index}}">{{announcement.getTitle()}}</td>
+                            <td id="animalName{{$index}}">{{announcement.animal.getName()}}</td>
+                            <td id="location{{$index}}">{{announcement.getLocationMissed()}}</td>
+                            <td id="annouDateAdded{{$index}}">{{announcement.getDateAdded()}}</td>
+                            <td>
+                                <button type="button" class="btn btn-warning" id="modify{{$index}}" value="View More" ng-click="modifyAnnouncement($index,announcement)">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" id="remove{{$index}}" value="X" ng-click="announcementCtrl.removeAnnouncement($index,announcement)">
+                                    <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="other-controller">
+        <div class="centered" boundary-links="true">
+            <dir-pagination-controls boundary-links="true" template-url="../templates/dir-pagination-controls.html"></dir-pagination-controls>
+        </div>
+    </div>
+
+</div>
+</div>

@@ -1,0 +1,118 @@
+<div class="container" ng-controller="animalManagementController as animalMgmCtrl" ng-if="user.getRole() == 1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 ng-if="filteredData.length == 0">Currently you don't have animals registereds</h4>
+                <div class="table-responsive" ng-if="filteredData.length > 0">
+                  <h4>My animals registereds</h4>
+                    <table id="mytable" class="table table-bordred table-striped">
+                        <thead>
+                            <th></th>
+                            <th>Name</th>
+                            <th>weight</th>
+                            <th>Height</th>
+                            <th>Description</th>
+                            <th>Date of birth</th>
+                            <th>Edit</th>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="animal in filteredData | itemsPerPage: pageSize" current-page="currentPage">
+                                <td id="animalImage{{$index}}">
+                                    <img src="{{animal.getAnimalImage()}} " alt="" width="50px" height="50px"/>
+                                </td>
+                                <td id="name{{$index}}">
+                                    {{ animal.getName()}}
+                                </td>
+                                <td id="weight{{$index}}">
+                                    {{ animal.getWeight() }}
+                                </td>
+
+                                <td id="heigth{{$index}}">
+                                    {{ animal.getHeight()}}
+                                </td>
+                                <td id="description{{$index}}">
+                                    {{ animal.getDescription() }}
+                                </td>
+                                <td id="dateOfBirth{{$index}}">
+                                    {{ animal.getDateOfBirth()}}
+                                </td>
+
+                                <td>
+                                    <button type="button" class="btn btn-warning" id="modify{{$index}}" value="View More" ng-click="modifyAnimalData($index,animal)">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" id="remove{{$index}}" value="X" ng-click="animalMgmCtrl.removeAnimal($index,animal)">
+                                        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" ng-controller="animalManagementController as animalMgmCtrl" ng-if="user.getRole() == 2" ng-init="animalMgmCtrl.loadAllAnimals()">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+              <h4 ng-if="filteredDataAllAnimals.length == 0">Currently we don't have animals registereds</h4>
+
+                <div class="table-responsive" ng-if="filteredDataAllAnimals.length != 0">
+                  <h4>All animals Registereds</h4>
+                    <table id="mytable" class="table table-bordred table-striped">
+                        <thead>
+                            <th>Name</th>
+                            <th>weight</th>
+                            <th>Height</th>
+                            <th>Description</th>
+                            <th>Date of birth</th>
+                            <th>Edit</th>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="animal in filteredDataAllAnimals | itemsPerPage: pageSize" current-page="currentPage">
+                              <td id="animalImage{{$index}}">
+                                  <img src="{{animal.getAnimalImage()}} " alt="" width="50px" height="50px"/>
+                              </td>
+                              <td id="name{{$index}}">
+                                  {{ animal.getName()}}
+                              </td>
+                              <td id="weight{{$index}}">
+                                  {{ animal.getWeight() }}
+                              </td>
+
+                              <td id="heigth{{$index}}">
+                                  {{ animal.getHeight()}}
+                              </td>
+                              <td id="description{{$index}}">
+                                  {{ animal.getDescription() }}
+                              </td>
+                              <td id="dateOfBirth{{$index}}">
+                                  {{ animal.getDateOfBirth()}}
+                              </td>
+
+                              <td>
+                                  <button type="button" class="btn btn-warning" id="modify{{$index}}" value="View More" ng-click="modifyAnimalData($index,animal)">
+                                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-danger" id="remove{{$index}}" value="X" ng-click="animalMgmCtrl.removeAnimal($index,animal)">
+                                      <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                  </button>
+                              </td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

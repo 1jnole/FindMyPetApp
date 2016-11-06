@@ -1,0 +1,23 @@
+<div class="container" ng-controller="announcementManagementController as announcementCtrl">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1 toppad">
+    <div >
+
+            <form class="form-horizontal" name="reportForm" ng-submit="reportForm.$valid && announcementCtrl.createReport()">
+                       <div class="form-class">
+                         <label for="announcement">Where you saw the pet?</label>
+                         <input type="text" gm-places-autocomplete   id="inputLocationAnnouncements" class="form-control ng-invalid" required />
+                       </div>
+
+                       <div class="form-class">
+                         <label for="announcement">Please enter your mail to contact with you as soon as posible </label>
+                             <input type="email" class="form-control" id="inputEmailLogin" placeholder="user@gmail.com" name="email"  required>
+                       </div>
+
+                      <div class="form-class"> </br><input class="btn btn-success" type="submit"  value="Send" ng-disabled="reportForm.$invalid" /> </div>
+                        <!--<button class="btn btn-default btn-warning btn-lg-6" type="button" >Back</button> -->
+            </form>
+    </div>
+</div>
+    </div>
+</div>
